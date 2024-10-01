@@ -9,16 +9,17 @@ function App() {
 
   const [ taskState, setTaskState ] = useState({
     tasks: [
-      { id: 1, title:"Dishes", description: "Empty dishwasher", deadline: "Today", done: false },
-      { id: 2, title: "Laundry", description: "Fold clothes and put away", deadline: "Tomorrow", done: false },
-      { id: 3, title: "Tidy up", deadline: "Today", done: false}
+      { id: 1, title:"Dishes", description: "Empty dishwasher", deadline: "Today", done: false, priority: "Low" },
+      { id: 2, title: "Laundry", description: "Fold clothes and put away", deadline: "Tomorrow", done: false, priority: "Medium" },
+      { id: 3, title: "Tidy up", deadline: "Today", done: false, priority: "High"}
     ]
   });
 
   const [ formState, setFormState ] = useState({
     title: "",
     description: "",
-    deadline: ""
+    deadline: "",
+    priority:""
   });
 
   const doneHandler = (taskIndex) => {
@@ -47,6 +48,8 @@ function App() {
       case "deadline":
           form.deadline = event.target.value;
           break;
+      case "priority":
+          form.priority = event.target.value;
       default:
           form = formState;
     }
@@ -65,6 +68,8 @@ function App() {
     tasks.push(form);
     setTaskState({tasks});
   }
+
+  
   
    return (
     <div className="container">
@@ -77,6 +82,7 @@ function App() {
       deadline={task.deadline}
       key={task.id}
       done={task.done}
+      priority={task.priority}
       markDone={() => doneHandler(index)}
       deleteTask = {() => deleteHandler(index)}
     />
